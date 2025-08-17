@@ -8,4 +8,9 @@ export default defineConfig({
   define: {
     'React': 'React',
   },
+  build: {
+    rollupOptions: {
+      external: ['React'],
+    },
+  },
 })
