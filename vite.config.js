@@ -9,6 +9,7 @@ export default defineConfig({
     'React': 'React',
   },
   build: {
+    sourcemap: true,
     rollupOptions: {
       external: ['React'],
     },
