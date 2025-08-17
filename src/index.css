@@ -1,3 +1,338 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 自定义CSS变量 - 日本科技风格 */
+:root {
+  /* 主色调 */
+  --cyber-blue: #00d4ff;
+  --cyber-purple: #b444f9;
+  --cyber-pink: #ff007a;
+  --cyber-orange: #ff6b35;
+  --cyber-green: #39ff14;
+  --cyber-red: #ff073a;
+  
+  /* 背景色 */
+  --bg-dark: #0a0a0f;
+  --bg-darker: #1a1a2e;
+  --bg-card: #16213e;
+  
+  /* 文字颜色 */
+  --text-primary: #ffffff;
+  --text-secondary: #e5e5e5;
+  --text-muted: #a1a1aa;
+  
+  /* 边框颜色 */
+  --border-glow: rgba(0, 212, 255, 0.3);
+  --border-purple: rgba(180, 68, 249, 0.3);
+}
+
+/* 基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rajdhani', 'Orbitron', monospace;
+  background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 50%, var(--bg-card) 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 网格背景效果 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--cyber-blue), var(--cyber-purple));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--cyber-purple), var(--cyber-pink));
+}
+
+/* 组件样式 */
+@layer components {
+  /* 赛博按钮 */
+  .cyber-button {
+    @apply relative px-6 py-3 font-semibold text-white transition-all duration-300 transform;
+    background: linear-gradient(45deg, var(--cyber-blue), var(--cyber-purple));
+    border: 1px solid var(--cyber-blue);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    font-family: 'Orbitron', monospace;
+  }
+  
+  .cyber-button:hover {
+    @apply scale-105;
+    background: linear-gradient(45deg, var(--cyber-purple), var(--cyber-pink));
+    box-shadow: 0 0 30px rgba(180, 68, 249, 0.5), inset 0 0 30px rgba(255, 255, 255, 0.15);
+  }
+  
+  .cyber-button:active {
+    @apply scale-95;
+  }
+  
+  .cyber-button-secondary {
+    @apply cyber-button;
+    background: transparent;
+    border: 2px solid var(--cyber-blue);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+  }
+  
+  .cyber-button-secondary:hover {
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+  }
+  
+  /* 赛博卡片 */
+  .cyber-card {
+    @apply relative p-6 rounded-lg backdrop-blur-lg border transition-all duration-300;
+    background: rgba(26, 26, 46, 0.8);
+    border: 1px solid var(--border-glow);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(0, 212, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .cyber-card:hover {
+    border-color: var(--cyber-purple);
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.4),
+      0 0 30px rgba(180, 68, 249, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  /* 输入框 */
+  .cyber-input {
+    @apply w-full px-4 py-3 bg-transparent border-2 rounded-lg transition-all duration-300 text-white placeholder-gray-400;
+    border-color: var(--border-glow);
+    font-family: 'Rajdhani', monospace;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  .cyber-input:focus {
+    @apply outline-none;
+    border-color: var(--cyber-blue);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  /* 震光文字 */
+  .neon-text {
+    @apply font-bold;
+    font-family: 'Orbitron', monospace;
+    text-shadow: 
+      0 0 10px var(--cyber-blue),
+      0 0 20px var(--cyber-blue),
+      0 0 30px var(--cyber-blue);
+  }
+  
+  .neon-text-purple {
+    @apply font-bold;
+    font-family: 'Orbitron', monospace;
+    text-shadow: 
+      0 0 10px var(--cyber-purple),
+      0 0 20px var(--cyber-purple),
+      0 0 30px var(--cyber-purple);
+  }
+  
+  .neon-text-pink {
+    @apply font-bold;
+    font-family: 'Orbitron', monospace;
+    text-shadow: 
+      0 0 10px var(--cyber-pink),
+      0 0 20px var(--cyber-pink),
+      0 0 30px var(--cyber-pink);
+  }
+  
+  /* 进度条 */
+  .cyber-progress {
+    @apply w-full h-3 rounded-full overflow-hidden relative;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-glow);
+  }
+  
+  .cyber-progress-bar {
+    @apply h-full transition-all duration-500 relative;
+    background: linear-gradient(90deg, var(--cyber-blue), var(--cyber-purple), var(--cyber-pink));
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  }
+  
+  .cyber-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+  
+  /* 状态指示器 */
+  .status-processing {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+    background: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+  }
+  
+  .status-completed {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+    background: rgba(57, 255, 20, 0.1);
+    color: var(--cyber-green);
+    border: 1px solid rgba(57, 255, 20, 0.3);
+  }
+  
+  .status-failed {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+    background: rgba(255, 7, 58, 0.1);
+    color: var(--cyber-red);
+    border: 1px solid rgba(255, 7, 58, 0.3);
+  }
+  
+  /* 导航栏 */
+  .cyber-nav {
+    @apply fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b transition-all duration-300;
+    background: rgba(26, 26, 46, 0.9);
+    border-bottom: 1px solid var(--border-glow);
+  }
+  
+  .cyber-nav-link {
+    @apply px-4 py-2 rounded-lg transition-all duration-300 font-medium relative overflow-hidden;
+    font-family: 'Rajdhani', monospace;
+    color: var(--text-secondary);
+  }
+  
+  .cyber-nav-link:hover,
+  .cyber-nav-link.active {
+    color: var(--cyber-blue);
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+  }
+  
+  .cyber-nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+    transition: left 0.5s;
+  }
+  
+  .cyber-nav-link:hover::before {
+    left: 100%;
+  }
+  
+  /* 上传区域 */
+  .cyber-dropzone {
+    @apply border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 relative overflow-hidden;
+    border-color: var(--border-glow);
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .cyber-dropzone:hover,
+  .cyber-dropzone.active {
+    border-color: var(--cyber-blue);
+    background: rgba(0, 212, 255, 0.05);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+  }
+  
+  /* 数据表格 */
+  .cyber-table {
+    @apply w-full border-collapse;
+  }
+  
+  .cyber-table th {
+    @apply px-6 py-4 text-left font-semibold border-b;
+    font-family: 'Orbitron', monospace;
+    color: var(--cyber-blue);
+    border-bottom: 1px solid var(--border-glow);
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  .cyber-table td {
+    @apply px-6 py-4 border-b transition-all duration-300;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+  }
+  
+  .cyber-table tr:hover td {
+    background: rgba(0, 212, 255, 0.05);
+  }
+}
+
+/* 动画 */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 动画类 */
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .cyber-card {
+    @apply p-4;
+  }
+  
+  .cyber-button {
+    @apply px-4 py-2 text-sm;
+  }
+  
+  .neon-text {
+    @apply text-lg;
+  }
+}
+
+/* 默认的暗黑模式 */
+.dark {
+  color-scheme: dark;
+}
